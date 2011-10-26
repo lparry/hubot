@@ -34,6 +34,10 @@ class IrcBot extends Robot
       if message.match new RegExp "^#{options.nick}", "i"
         unless user_id[from]
           user_id[from] = next_id
+          self.brain.data.users[from] ||= {}
+          self.brain.data.users[from].id = from
+          self.brain.data.users[from].name = from
+          console.log self.brain.data.users
           next_id = next_id + 1
 
       user = new Robot.User user_id[from], {
